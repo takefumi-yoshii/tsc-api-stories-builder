@@ -1,0 +1,38 @@
+{
+  "name": "example-app",
+  "version": "1.0.0",
+  "author": "takefumi-yoshii",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "parcel src/index.html",
+    "storybook": "yarn storybook:build-stories && yarn storybook:start",
+    "storybook:build-stories": "stories-builder",
+    "storybook:start": "start-storybook -c __storybook__ -p 9001",
+    "prettier": "prettier --write src/**/*.{ts,tsx}"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "@storybook/cli": "^5.1.11",
+    "@storybook/react": "^5.1.11",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/storybook__react": "^4.0.2",
+    "@types/styled-components": "^4.1.18",
+    "babel-loader": "^8.0.6",
+    "prettier": "^1.18.2",
+    "stories-builder": "file:../lib",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 60
+  }
+}
