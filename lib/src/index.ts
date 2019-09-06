@@ -21,37 +21,32 @@ export function run(cliConfig: Config) {
     fs.removeSync(distDir)
   }
   function emitStoryRenderFiles(declarationName: string) {
-    getTargetFileNames(sourceFiles, declarationName) // 対象ファイルの絞り込み
-      .map(mapFileInfo(srcDir, distDir)) // メタ情報を構築
+    getTargetFileNames(sourceFiles, declarationName)
+      .map(mapFileInfo(srcDir, distDir))
       .map(fileInfo => {
-        // StoryRender関数を実行するASTを構築
         const ast = createStoryRenderAst({
           declarationName,
           fileInfo
         })
-        const fileBody = printNode(ast) // ASTを文字列に変換
+        const fileBody = printNode(ast)
         const fileName = `${fileInfo.distDir}/${fileInfo.name}.${fileInfo.ext}`
-        emitFile(fileInfo.distDir, fileName, fileBody) // ファイル出力
+        emitFile(fileInfo.distDir, fileName, fileBody)
       })
   }
   function emitStoryRegisterFiles(declarationName: string) {
-    getTargetFileNames(sourceFiles, declarationName) // 対象ファイルの絞り込み
-      .map(mapFileInfo(srcDir, distDir)) // メタ情報を構築
+    getTargetFileNames(sourceFiles, declarationName)
+      .map(mapFileInfo(srcDir, distDir))
       .map(fileInfo => {
-        // StoryRegister関数を実行するASTを構築
         const ast = createStoryRegisterAst({
           declarationName,
           fileInfo
         })
-        const fileBody = printNode(ast) // ASTを文字列に変換
+        const fileBody = printNode(ast)
         const fileName = `${fileInfo.distDir}/${fileInfo.name}.${fileInfo.ext}`
-        emitFile(fileInfo.distDir, fileName, fileBody) // ファイル出力
+        emitFile(fileInfo.distDir, fileName, fileBody)
       })
   }
-  // ツール実行直後「.stroies.tsx」が出力されているディレクトリは削除する
   cleanUp()
-  // StoryRender関数を実行するファイルを出力する
   emitStoryRenderFiles(conf.storyRenderDeclarationName)
-  // StoryRegister関数を実行するファイルを出力する
   emitStoryRegisterFiles(conf.storyRegisterDeclarationName)
 }
